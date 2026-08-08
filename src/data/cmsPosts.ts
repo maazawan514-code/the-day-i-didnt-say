@@ -1,7 +1,9 @@
 import matter from 'gray-matter';
 import type { Post } from '../types';
 
-const rawPostFiles = import.meta.globEager('../../content/posts/*.md', { as: 'raw' }) as Record<string, string>;
+// Vite-compatible build-time glob import. Use eager:true to include raw markdown
+// content at build time so CMS_POSTS is available to the app without runtime fetches.
+const rawPostFiles = import.meta.glob('../../content/posts/*.md', { as: 'raw', eager: true }) as Record<string, string>;
 
 const parseRawPost = (filePath: string, raw: string): Post => {
   const { data, content } = matter(raw);
