@@ -1,0 +1,6 @@
+{
+  "name": "The Day I Didn't Say",
+  "description": "Poetry • Letters • Essays • Reflections — A minimalist literary blog containing diary entries, poetry, letters, and reflections.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

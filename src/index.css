@@ -1,0 +1,241 @@
+@import "tailwindcss";
+
+@theme {
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-poetry: 'EB Garamond', Georgia, serif;
+  --font-math: 'IBM Plex Serif', serif;
+  --font-handwritten: 'Comic Sans MS', 'Caveat', cursive, sans-serif;
+
+  --color-paper: #F8F7F4;
+  --color-paper-subtle: #EFEDE8;
+  --color-paper-card: #FFFFFF;
+  
+  --color-ink-primary: #2B2B2B;
+  --color-ink-secondary: #666666;
+
+  --color-forest: #A67C52;
+  --color-forest-light: #8C6842;
+  --color-brown: #A67C52;
+  --color-brown-light: #8C6842;
+  --color-line: #DDD7CC;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    font-family: var(--font-body);
+  }
+
+  body {
+    background-color: var(--color-paper);
+    color: var(--color-ink-primary);
+  }
+}
+
+/* Custom Paper Texture Overlay */
+.paper-grain {
+  background-image: radial-gradient(#202020 0.4px, transparent 0.4px);
+  background-size: 16px 16px;
+  opacity: 0.035;
+}
+
+/* Custom Paper Grid for Diary / Notebook view */
+.diary-grid {
+  background-image: linear-gradient(to bottom, rgba(138, 106, 74, 0.08) 1px, transparent 1px);
+  background-size: 100% 2rem;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #DDD7CC;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #A67C52;
+}
+
+/* Drop Cap Styling */
+.first-letter-drop::first-letter {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 3.85rem;
+  line-height: 0.85;
+  float: left;
+  margin-right: 0.85rem;
+  margin-top: 0.15rem;
+  color: #A67C52;
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   Hero Title Literary Cumulative Word Reveal Animation System
+   - Total Loop Duration: 7.0 Seconds
+   - 0.0s: "The" appears (opacity 0->1, translateY 8px->0, blur 6px->0)
+   - 1.0s: "Day" appears (opacity 0->1, translateY 8px->0, blur 6px->0). "The" remains!
+   - 2.0s: "I" appears. "The Day" remain!
+   - 3.0s: "Didn't" appears. "The Day I" remain!
+   - 4.0s: "Say" appears. "The Day I Didn't" remain!
+   - 4.0s - 6.0s: Full title "The Day I Didn't Say" stays completely visible
+   - 6.0s - 6.3s: ENTIRE title smoothly fades out over 300ms
+   - 6.3s - 7.0s: Title is completely invisible for 1s
+   - 7.0s: Restarts from "The"
+   ========================================================================== */
+
+@keyframes wordCumulative0 {
+  0% { opacity: 0; transform: translateY(8px); filter: blur(6px); }
+  3.57% { opacity: 1; transform: translateY(0); filter: blur(0px); }
+  85.71% { opacity: 1; transform: translateY(0); filter: blur(0px); }
+  90.00% { opacity: 0; transform: translateY(0); filter: blur(4px); }
+  100% { opacity: 0; transform: translateY(8px); filter: blur(6px); }
+}
+
+@keyframes wordCumulative1 {
+  0%, 14.28% { opacity: 0; transform: translateY(8px); filter: blur(6px); }
+  17.85% { opacity: 1; transform: translateY(0); filter: blur(0px); }
+  85.71% { opacity: 1; transform: translateY(0); filter: blur(0px); }
+  90.00% { opacity: 0; transform: translateY(0); filter: blur(4px); }
+  100% { opacity: 0; transform: translateY(8px); filter: blur(6px); }
+}
+
+@keyframes wordCumulative2 {
+  0%, 28.57% { opacity: 0; transform: translateY(8px); filter: blur(6px); }
+  32.14% { opacity: 1; transform: translateY(0); filter: blur(0px); }
+  85.71% { opacity: 1; transform: translateY(0); filter: blur(0px); }
+  90.00% { opacity: 0; transform: translateY(0); filter: blur(4px); }
+  100% { opacity: 0; transform: translateY(8px); filter: blur(6px); }
+}
+
+@keyframes wordCumulative3 {
+  0%, 42.85% { opacity: 0; transform: translateY(8px); filter: blur(6px); }
+  46.42% { opacity: 1; transform: translateY(0); filter: blur(0px); }
+  85.71% { opacity: 1; transform: translateY(0); filter: blur(0px); }
+  90.00% { opacity: 0; transform: translateY(0); filter: blur(4px); }
+  100% { opacity: 0; transform: translateY(8px); filter: blur(6px); }
+}
+
+@keyframes wordCumulative4 {
+  0%, 57.14% { opacity: 0; transform: translateY(8px); filter: blur(6px); }
+  60.71% { opacity: 1; transform: translateY(0); filter: blur(0px); }
+  85.71% { opacity: 1; transform: translateY(0); filter: blur(0px); }
+  90.00% { opacity: 0; transform: translateY(0); filter: blur(4px); }
+  100% { opacity: 0; transform: translateY(8px); filter: blur(6px); }
+}
+
+.animate-word-cumulative-0 {
+  animation: wordCumulative0 7s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+  will-change: transform, opacity, filter;
+}
+
+.animate-word-cumulative-1 {
+  animation: wordCumulative1 7s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+  will-change: transform, opacity, filter;
+}
+
+.animate-word-cumulative-2 {
+  animation: wordCumulative2 7s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+  will-change: transform, opacity, filter;
+}
+
+.animate-word-cumulative-3 {
+  animation: wordCumulative3 7s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+  will-change: transform, opacity, filter;
+}
+
+.animate-word-cumulative-4 {
+  animation: wordCumulative4 7s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+  will-change: transform, opacity, filter;
+}
+
+/* Golden Ink Shimmer Sweep */
+@keyframes goldenInkShimmer {
+  0% { transform: translateX(-100%); opacity: 0; }
+  5% { opacity: 0.6; }
+  20% { transform: translateX(100%); opacity: 0.8; }
+  25% { opacity: 0; transform: translateX(120%); }
+  100% { opacity: 0; transform: translateX(120%); }
+}
+
+.animate-golden-shimmer {
+  animation: goldenInkShimmer 7s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+  will-change: transform, opacity;
+}
+
+/* Moonlight Diagonal Light Sweep (every 30 seconds) */
+@keyframes moonlightSweep {
+  0%, 93.3% {
+    transform: translateX(-150%) rotate(25deg);
+    opacity: 0;
+  }
+  95% {
+    opacity: 0.1;
+  }
+  98.3% {
+    transform: translateX(150%) rotate(25deg);
+    opacity: 0.1;
+  }
+  99.5%, 100% {
+    transform: translateX(180%) rotate(25deg);
+    opacity: 0;
+  }
+}
+
+.animate-moonlight-sweep {
+  animation: moonlightSweep 30s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+/* Paper Error Shake Animation */
+@keyframes paperShake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-4px); }
+  40%, 80% { transform: translateX(4px); }
+}
+
+.animate-paper-shake {
+  animation: paperShake 0.4s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+/* Paper Ink Ripple Animation */
+@keyframes rippleExpand {
+  0% {
+    transform: scale(0);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+.animate-ripple-expand {
+  animation: rippleExpand 0.6s ease-out forwards;
+}
+
+/* Reduced Motion Override */
+@media (prefers-reduced-motion: reduce) {
+  .animate-word-cumulative-0,
+  .animate-word-cumulative-1,
+  .animate-word-cumulative-2,
+  .animate-word-cumulative-3,
+  .animate-word-cumulative-4,
+  .animate-paper-shake,
+  .animate-ripple-expand {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+  }
+  .animate-golden-shimmer,
+  .animate-moonlight-sweep {
+    display: none !important;
+  }
+}
+
+
