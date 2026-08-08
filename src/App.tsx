@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { SAMPLE_POSTS } from './data/posts';
+import { CMS_POSTS } from './data/cmsPosts';
 import { Post, Category } from './types';
 import { Navbar } from './components/Navbar';
 import { HeroSection } from './components/HeroSection';
@@ -39,6 +40,8 @@ export default function App() {
   const [bookmarksOpen, setBookmarksOpen] = useState(false);
   const [rssOpen, setRssOpen] = useState(false);
 
+  const posts = CMS_POSTS.length > 0 ? CMS_POSTS : SAMPLE_POSTS;
+
   const handleToggleBookmark = (e: React.MouseEvent | null, post: Post) => {
     if (e) e.stopPropagation();
     const exists = bookmarks.some((b) => b.id === post.id);
@@ -67,19 +70,17 @@ export default function App() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const featuredPost = SAMPLE_POSTS.find((p) => p.featured) || SAMPLE_POSTS[0];
+  const featuredPost = posts.find((p) => p.featured) || posts[0];
 
   const categoriesList: (Category | 'All')[] = [
     'All',
-    'Poetry',
-    'Letters',
-    'Essays',
-    'Reflections',
-    'Journal',
+    ...['Poetry', 'Letters', 'Essays', 'Reflections', 'Journal', 'Personal'].filter((category) =>
+      posts.some((p) => p.category === category)
+    ) as Category[],
   ];
 
   // Filter posts based on selected category
-  const filteredPosts = SAMPLE_POSTS.filter(
+  const filteredPosts = posts.filter(
     (p) => selectedCategory === 'All' || p.category === selectedCategory
   );
 
@@ -114,7 +115,7 @@ export default function App() {
           {selectedPost ? (
             <PostDetail
               post={selectedPost}
-              allPosts={SAMPLE_POSTS}
+              allPosts={posts}
               onBack={handleBackFromPost}
               onSelectPost={handleSelectPost}
               isBookmarked={bookmarks.some((b) => b.id === selectedPost.id)}
@@ -135,7 +136,7 @@ export default function App() {
                       const el = document.getElementById('latest-entries');
                       if (el) el.scrollIntoView({ behavior: 'smooth' });
                     }}
-                    postCount={SAMPLE_POSTS.length}
+                    postCount={posts.length}
                   />
 
                   {/* Featured Spotlight Article */}
@@ -287,7 +288,7 @@ export default function App() {
 
               {activeTab === 'archive' && (
                 <div className="pt-20">
-                  <ArchiveView posts={SAMPLE_POSTS} onSelectPost={handleSelectPost} />
+                  <ArchiveView posts={posts} onSelectPost={handleSelectPost} />
                 </div>
               )}
 
@@ -311,7 +312,7 @@ export default function App() {
       <SearchModal
         isOpen={searchOpen}
         onClose={() => setSearchOpen(false)}
-        posts={SAMPLE_POSTS}
+        posts={posts}
         onSelectPost={handleSelectPost}
       />
 
@@ -326,7 +327,7 @@ export default function App() {
       <RSSModal
         isOpen={rssOpen}
         onClose={() => setRssOpen(false)}
-        posts={SAMPLE_POSTS}
+        posts={posts}
       />
 
       {/* Footer */}

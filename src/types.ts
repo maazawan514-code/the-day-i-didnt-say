@@ -3,7 +3,20 @@ export type Category =
   | 'Letters'
   | 'Essays'
   | 'Reflections'
-  | 'Journal';
+  | 'Journal'
+  | 'Personal';
+
+export type ContentType =
+  | 'poetry'
+  | 'letter'
+  | 'mathematics'
+  | 'teaching'
+  | 'journal'
+  | 'reflections'
+  | 'philosophy'
+  | 'memory'
+  | 'domestic'
+  | string;
 
 export interface Footnote {
   id: number;
@@ -35,7 +48,7 @@ export interface Post {
     avatar?: string;
   };
   featured?: boolean;
-  contentType: 'poetry' | 'letter' | 'mathematics' | 'teaching' | 'journal' | 'reflections';
+  contentType: ContentType;
   content: string; // Markdown or structured text
   mathFormulas?: { label: string; latex: string; explanation?: string }[];
   footnotes?: Footnote[];
@@ -43,6 +56,10 @@ export interface Post {
   letterRecipient?: string;
   diaryLocation?: string;
   coverImage?: string;
+  featuredImage?: string;
+  seoTitle?: string;
+  seoDescription?: string;
+  ogImage?: string;
 }
 
 export interface Comment {

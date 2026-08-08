@@ -1,0 +1,41 @@
+backend:
+  name: github
+  repo: maazawan514-code/the-day-i-didnt-say
+  branch: main
+  auth_scope: public_repo
+  auth_endpoint: "/api/auth"
+
+media_folder: "public/uploads"
+public_folder: "/uploads"
+
+collections:
+  - name: "posts"
+    label: "Blog Posts"
+    folder: "content/posts"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Slug", name: "slug", widget: "string" }
+      - label: "Category"
+        name: "category"
+        widget: "select"
+        options:
+          - Poetry
+          - Letters
+          - Essays
+          - Reflections
+          - Journal
+          - Mathematics
+          - Teaching
+      - { label: "Excerpt", name: "excerpt", widget: "text" }
+      - { label: "Content", name: "content", widget: "markdown" }
+      - { label: "Featured Image", name: "featuredImage", widget: "image", required: false }
+      - { label: "Publication Date", name: "date", widget: "datetime", format: "YYYY-MM-DD HH:mm" }
+      - { label: "Reading Time", name: "readTime", widget: "string", required: false }
+      - { label: "Tags", name: "tags", widget: "list", field: { label: "Tag", name: "tag", widget: "string" }, required: false }
+      - { label: "Featured", name: "featured", widget: "boolean", default: false }
+      - { label: "SEO Title", name: "seoTitle", widget: "string", required: false }
+      - { label: "SEO Description", name: "seoDescription", widget: "text", required: false }
+      - { label: "OG Image", name: "ogImage", widget: "image", required: false }
+      - { label: "Draft", name: "draft", widget: "boolean", default: false }

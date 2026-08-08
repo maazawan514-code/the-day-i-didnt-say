@@ -52,13 +52,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
     return matchesCat && matchesQuery;
   });
 
-  const categories: Category[] = [
-    'Poetry',
-    'Letters',
-    'Essays',
-    'Reflections',
-    'Journal',
-  ];
+  const categories: Category[] = Array.from(new Set(posts.map((p) => p.category))) as Category[];
 
   return (
     <AnimatePresence>

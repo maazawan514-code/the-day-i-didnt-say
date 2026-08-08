@@ -18,14 +18,8 @@ export const ArchiveView: React.FC<ArchiveViewProps> = ({ posts, onSelectPost })
   // Extract unique tags
   const tags = Array.from(new Set(posts.flatMap((p) => p.tags)));
 
-  // Categories list
-  const categories: Category[] = [
-    'Poetry',
-    'Letters',
-    'Essays',
-    'Reflections',
-    'Journal',
-  ];
+  // Categories list derived from posts
+  const categories: Category[] = Array.from(new Set(posts.map((p) => p.category))) as Category[];
 
   // Filter posts
   const filtered = posts.filter((p) => {
