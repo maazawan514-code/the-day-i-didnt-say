@@ -3,9 +3,8 @@ backend:
   repo: maazawan514-code/the-day-i-didnt-say
   branch: main
   base_url: https://the-day-i-didnt-say.vercel.app
-  auth_endpoint: api/auth
+  auth_endpoint: /api/auth
   auth_scope: public_repo
-  auth_endpoint: "/api/auth"
 
 media_folder: "public/uploads"
 public_folder: "/uploads"
