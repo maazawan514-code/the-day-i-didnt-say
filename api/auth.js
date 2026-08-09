@@ -1,36 +1,22 @@
-// Simple Vercel serverless function to exchange GitHub OAuth code for an access token.
-// Instructions:
-// 1. Register a GitHub OAuth App and set the Authorization callback URL to
-//    https://<YOUR_DOMAIN>/admin/
-// 2. Add the following Environment Variables to your Vercel project:
-//    - GITHUB_CLIENT_ID
-//    - GITHUB_CLIENT_SECRET
-// 3. In `public/admin/config.yml`, set `auth_endpoint: "/api/auth"` (or the full deployed URL).
-// 4. Do NOT commit secrets to the repo.
-
 export default async function handler(req, res) {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET,POST,OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-
-  if (req.method === 'OPTIONS') {
-    return res.status(200).end();
-  }
-
   const CLIENT_ID = process.env.GITHUB_CLIENT_ID;
   const CLIENT_SECRET = process.env.GITHUB_CLIENT_SECRET;
 
   if (!CLIENT_ID || !CLIENT_SECRET) {
-    return res.status(500).json({ error: 'GITHUB_CLIENT_ID or GITHUB_CLIENT_SECRET not configured in environment.' });
+    return res.status(500).send('GITHUB_CLIENT_ID or GITHUB_CLIENT_SECRET not configured in environment.');
   }
 
-  // Expecting a POST with JSON body { code: '<github_oauth_code>' }
-  const code = (req.method === 'POST' ? req.body && req.body.code : req.query.code) || null;
+  const { code } = req.query;
 
+  // Step 1: No code yet -> redirect to GitHub's OAuth authorize page
   if (!code) {
-    return res.status(400).json({ error: 'Missing `code` parameter.' });
+    const redirectUri = `https://${req.headers.host}/api/auth`;
+    const githubAuthUrl = `https://github.com/login/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${encodeURIComponent(redirectUri)}&scope=repo,user`;
+    res.writeHead(302, { Location: githubAuthUrl });
+    return res.end();
   }
 
+  // Step 2: We have a code -> exchange it for an access token
   try {
     const tokenRes = await fetch('https://github.com/login/oauth/access_token', {
       method: 'POST',
@@ -40,16 +26,46 @@ export default async function handler(req, res) {
       },
       body: JSON.stringify({ client_id: CLIENT_ID, client_secret: CLIENT_SECRET, code }),
     });
-
     const tokenJson = await tokenRes.json();
 
     if (tokenJson.error) {
-      return res.status(400).json({ error: tokenJson.error, error_description: tokenJson.error_description });
+      const errorScript = `
+        <script>
+          (function() {
+            function receiveMessage(e) {
+              window.opener.postMessage(
+                'authorization:github:error:${JSON.stringify(tokenJson).replace(/'/g, "\\'")}',
+                e.origin
+              );
+            }
+            window.addEventListener('message', receiveMessage, false);
+            window.opener.postMessage('authorizing:github', '*');
+          })();
+        </script>
+      `;
+      res.setHeader('Content-Type', 'text/html');
+      return res.status(400).send(errorScript);
     }
 
-    // Return the token in the shape expected by the CMS auth proxy
-    return res.status(200).json({ token: tokenJson.access_token });
+    // Success: send token back to the opener window via postMessage
+    const successScript = `
+      <script>
+        (function() {
+          function receiveMessage(e) {
+            window.opener.postMessage(
+              'authorization:github:success:${JSON.stringify({ token: tokenJson.access_token, provider: 'github' }).replace(/'/g, "\\'")}',
+              e.origin
+            );
+          }
+          window.addEventListener('message', receiveMessage, false);
+          window.opener.postMessage('authorizing:github', '*');
+        })();
+      </script>
+    `;
+    res.setHeader('Content-Type', 'text/html');
+    return res.status(200).send(successScript);
   } catch (err) {
-    return res.status(500).json({ error: 'Token exchange failed', detail: String(err) });
+    res.setHeader('Content-Type', 'text/html');
+    return res.status(500).send('<script>console.error("Token exchange failed: ' + String(err).replace(/"/g, '\\"') + '");</script>');
   }
 }
