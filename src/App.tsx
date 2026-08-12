@@ -12,7 +12,6 @@ import { ContactSection } from './components/ContactSection';
 import { Newsletter } from './components/Newsletter';
 import { FloatingLeaves } from './components/FloatingLeaves';
 import { PageLoader } from './components/PageLoader';
-import { WhisperNote } from './components/WhisperNote';
 import { SearchModal } from './components/SearchModal';
 import { BookmarksModal } from './components/BookmarksModal';
 import { RSSModal } from './components/RSSModal';
@@ -90,9 +89,6 @@ export default function App() {
     <div className="min-h-screen bg-[#F8F7F4] text-[#2B2B2B] selection:bg-[#A67C52] selection:text-white transition-colors duration-300 relative">
       {/* Handcrafted Initial Page Loader */}
       <PageLoader />
-
-      {/* Hidden Easter Egg Whisper Note after 45s */}
-      <WhisperNote />
 
       {/* Serene Floating Leaves Canvas */}
       <FloatingLeaves />

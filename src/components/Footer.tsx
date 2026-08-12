@@ -1,5 +1,4 @@
 import React from 'react';
-import { AuthorSignature } from './AuthorSignature';
 import { Feather, Mail, Instagram, Rss } from 'lucide-react';
 import { motion } from 'motion/react';
 
@@ -16,7 +15,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavClick, onOpenRss }) => {
   return (
     <footer className="mt-24 border-t border-[#DDD7CC] bg-[#FFFFFF] py-16 px-4 transition-colors">
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-10 text-center md:text-left">
-        {/* Brand & Author Signature */}
+        {/* Brand */}
         <div className="flex flex-col items-center md:items-start space-y-4">
           <div>
             <h3 className="font-serif text-xl text-[#2B2B2B] font-medium">
@@ -25,10 +24,6 @@ export const Footer: React.FC<FooterProps> = ({ onNavClick, onOpenRss }) => {
             <p className="font-serif italic text-xs text-[#A67C52]">
               Poetry • Letters • Essays • Reflections
             </p>
-          </div>
-          {/* Animated Handwritten Author Signature */}
-          <div className="pt-2">
-            <AuthorSignature width={160} height={42} />
           </div>
         </div>
 

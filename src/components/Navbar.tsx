@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { EnsoLogo } from './EnsoLogo';
-import { AmbientSoundToggle } from './AmbientSoundToggle';
 import { Category } from '../types';
 import { CMS_POSTS } from '../data/cmsPosts';
 import { SAMPLE_POSTS } from '../data/posts';
@@ -176,9 +175,6 @@ export const Navbar: React.FC<NavbarProps> = ({
 
         {/* Action Controls - Styled Fields */}
         <div className="flex items-center space-x-2 sm:space-x-2.5">
-          {/* Literary Ambient Reading Room Sound Toggle */}
-          <AmbientSoundToggle />
-
           {/* Search Trigger Field */}
           <button
             onClick={onOpenSearch}
