@@ -100,8 +100,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           </span>
           <span className="text-[#DDD7CC]">•</span>
           <span>{postCount} Published Reflections</span>
-          <span className="text-[#DDD7CC]">•</span>
-          <span className="italic font-serif">Written Slowly</span>
         </motion.div>
 
         {/* Begin Reading Button & Gentle Bouncing Scroll Indicator */}

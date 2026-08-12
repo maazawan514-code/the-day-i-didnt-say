@@ -1,5 +1,4 @@
 import React from 'react';
-import { Coffee, Compass } from 'lucide-react';
 
 export const AboutSection: React.FC = () => {
   return (
@@ -41,34 +40,6 @@ export const AboutSection: React.FC = () => {
             <p className="font-medium">Take your time.</p>
             <p className="font-medium">Read slowly.</p>
             <p className="font-medium italic">Stay a while.</p>
-          </div>
-        </div>
-
-        {/* Signature & Author Note */}
-        <div className="mt-12 pt-8 border-t border-[#DDD7CC] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
-          <div className="flex items-center space-x-4">
-            <div className="w-12 h-12 rounded-full bg-[#A67C52] text-white flex items-center justify-center font-serif text-xl font-bold shadow-xs">
-              M.
-            </div>
-            <div>
-              <p className="font-handwritten text-2xl text-[#2B2B2B]">
-                — M.
-              </p>
-              <p className="text-xs text-[#666666] font-serif italic">
-                Written Slowly. Read Gently.
-              </p>
-            </div>
-          </div>
-
-          <div className="flex items-center space-x-6 text-xs text-[#666666] font-sans">
-            <span className="flex items-center space-x-1.5">
-              <Coffee className="w-4 h-4 text-[#A67C52]" />
-              <span>Cold Tea</span>
-            </span>
-            <span className="flex items-center space-x-1.5">
-              <Compass className="w-4 h-4 text-[#A67C52]" />
-              <span>Solitude</span>
-            </span>
           </div>
         </div>
       </div>

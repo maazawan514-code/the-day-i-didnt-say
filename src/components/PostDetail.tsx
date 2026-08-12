@@ -342,26 +342,6 @@ export const PostDetail: React.FC<PostDetailProps> = ({
           ))}
         </div>
 
-        {/* Author Bio Card */}
-        <div className="mt-12 p-6 rounded-2xl bg-[#FFFFFF] border border-[#DDD7CC] flex items-center space-x-5 shadow-xs">
-          <div className="w-14 h-14 rounded-full bg-[#A67C52] text-white flex items-center justify-center font-serif text-2xl font-bold flex-shrink-0">
-            {post.author.name[0]}
-          </div>
-          <div>
-            <h4 className="font-serif text-lg text-[#2B2B2B] font-medium">
-              Written by {post.author.name}
-            </h4>
-            {post.author.role && (
-              <p className="text-xs text-[#A67C52] mb-1 font-serif italic">
-                {post.author.role}
-              </p>
-            )}
-            <p className="text-xs text-[#666666]">
-              A seeker of quiet observations, unmailed thoughts, and slow writing.
-            </p>
-          </div>
-        </div>
-
         {/* Previous & Next Navigation */}
         <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 gap-4 pt-8 border-t border-[#DDD7CC]">
           {prevPost ? (
