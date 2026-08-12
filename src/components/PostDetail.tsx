@@ -34,24 +34,7 @@ export const PostDetail: React.FC<PostDetailProps> = ({
   const [comments, setComments] = useState<Comment[]>(() => {
     const saved = localStorage.getItem(`comments_${post.id}`);
     if (saved) return JSON.parse(saved);
-    return [
-      {
-        id: 'c1',
-        postId: post.id,
-        authorName: 'Evelyn Wood',
-        date: '2 days ago',
-        text: 'This passage touched me deeply. In an age where everything is rushed, reading this feels like sitting by a warm fireplace.',
-        likes: 5,
-      },
-      {
-        id: 'c2',
-        postId: post.id,
-        authorName: 'Julian C.',
-        date: 'Yesterday',
-        text: 'The connection between math formulas and poetry here is breathtaking. Thank you for creating this quiet space.',
-        likes: 3,
-      }
-    ];
+    return [];
   });
 
   const [newCommentName, setNewCommentName] = useState('');
