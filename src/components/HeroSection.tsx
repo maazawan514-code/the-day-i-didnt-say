@@ -45,42 +45,21 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           </h1>
         </div>
 
-        {/* Hero Quote */}
-        <motion.blockquote
-          initial={{ opacity: 0, y: 12, filter: 'blur(4px)' }}
-          animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-          transition={{ duration: 1.2, delay: 1.9, ease: [0.16, 1, 0.3, 1] }}
-          className="font-serif text-xl sm:text-2xl text-[#A67C52] italic tracking-wide font-light max-w-xl mx-auto"
-        >
-          &ldquo;Some words are easier to write than to say.&rdquo;
-        </motion.blockquote>
-
         {/* Subtitle Category Tags */}
         <motion.p
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.2, delay: 2.1, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 1.2, delay: 1.9, ease: [0.16, 1, 0.3, 1] }}
           className="font-serif text-sm uppercase tracking-widest text-[#666666] font-medium"
         >
           Poetry • Letters • Essays • Reflections
-        </motion.p>
-
-        {/* Calming Description */}
-        <motion.p
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.2, delay: 2.3, ease: [0.16, 1, 0.3, 1] }}
-          className="font-body text-base sm:text-lg text-[#666666] max-w-xl mx-auto leading-relaxed font-light"
-        >
-          A peaceful refuge for diary entries, poetry, unmailed letters, and slow essays.
-          Written by hand, read at leisure.
         </motion.p>
 
         {/* Reading Metrics */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 2.5 }}
+          transition={{ duration: 1, delay: 2.1 }}
           className="flex items-center justify-center space-x-6 text-xs text-[#666666] pt-2 font-mono"
         >
           <span className="flex items-center space-x-1.5">
@@ -95,7 +74,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.2, delay: 2.7, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 1.2, delay: 2.3, ease: [0.16, 1, 0.3, 1] }}
           className="pt-6 flex flex-col items-center"
         >
           <button
