@@ -34,18 +34,15 @@ content: >-
   In an educational landscape defined by these systemic deficits, a dangerous cascade occurs when automated tools are introduced without ethical accountability:
 
 
-  **The Trap of Uncritical Rote Learning:**
+  1. **The Trap of Uncritical Rote Learning:**
 
-
-   Traditional schooling in such environments prioritizes memorization over inquiry. Students are trained to copy verbatim to pass standardized exams. When a child raised in an environment that actively penalizes dissent is handed access to generative AI, they do not treat it as an experimental tool to be interrogated. They treat it as the ultimate, infallible textbook.
-
-
-  1.  **The Unequipped Educator:**
+      Traditional schooling in such environments prioritizes memorization over inquiry. Students are trained to copy verbatim to pass standardized exams. When a child raised in an environment that actively penalizes dissent is handed access to generative AI, they do not treat it as an experimental tool to be interrogated. They treat it as the ultimate, infallible textbook.
+  2.  **The Unequipped Educator:**
 
      Top-down policies mandate "digital literacy" to project modernity, dropping these mandates onto underfunded classrooms managed by underprepared teachers. Constrained by strict administrative control, societal taboos, and rigid deadlines, teachers are left with no room to teach critical framing. AI usage devolves into raw automated output: copy-pasted responses and unexamined machine hallucinations. The room for genuine dialogue shrinks even further.
-  2. **Weaponization and Radicalization:**
+  3. **Weaponization and Radicalization:**
 
-      When a generation accustomed to passive consumption meets synthetic media and targeted algorithmic noise, young minds that have never been trained to dismantle a bad premise become effortlessly vulnerable to political exploitation. Polarization thrives where emotion overrides analysis. Radical actors and bad-faith political entities can leverage uncritical digital adoption, feeding manufactured narratives directly to a youth demographic that lacks both structural literacy and cognitive freedom.
+     When a generation accustomed to passive consumption meets synthetic media and targeted algorithmic noise, young minds that have never been trained to dismantle a bad premise become effortlessly vulnerable to political exploitation. Polarization thrives where emotion overrides analysis. Radical actors and bad-faith political entities can leverage uncritical digital adoption, feeding manufactured narratives directly to a youth demographic that lacks both structural literacy and cognitive freedom.
 
      Without the habit of *Denken ohne Geländer*, young people become cogs not just in a classroom or a bureaucracy, but in an automated political machinery designed to exploit their silence.
 
