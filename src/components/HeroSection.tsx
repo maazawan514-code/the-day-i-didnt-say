@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { ArrowDown, Clock, Sparkles, Feather } from 'lucide-react';
+import { ArrowDown, Clock, Feather } from 'lucide-react';
 
 interface HeroSectionProps {
   onExploreClick: () => void;
@@ -21,17 +21,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
       <div className="absolute inset-0 paper-grain pointer-events-none opacity-60" />
 
       <div className="relative z-10 max-w-4xl mx-auto space-y-8 flex flex-col items-center">
-        {/* Subtle Tagline Badge */}
-        <motion.div
-          initial={{ opacity: 0, y: 10, filter: 'blur(4px)' }}
-          animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-          transition={{ duration: 1, delay: 0.6, ease: "easeOut" }}
-          className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-[#EFEDE8] border border-[#DDD7CC] text-xs font-medium text-[#A67C52] tracking-wide shadow-xs"
-        >
-          <Sparkles className="w-3.5 h-3.5 text-[#A67C52]" />
-          <span>A Quiet Corner of the Internet</span>
-        </motion.div>
-
         {/* Cinematic Literary Animated Title with Shimmer & Moonlight Sweep */}
         <div className="relative group overflow-hidden py-2 px-4 rounded-xl">
           {/* Soft Golden Shimmer Sweep Bar during Reveal */}
