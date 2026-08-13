@@ -9,6 +9,9 @@ import {
 } from 'lucide-react';
 import { PaperInput, PaperTextarea, PaperButton } from './PaperFormControls';
 
+// Declare marked as a global (loaded from CDN in index.html)
+declare const marked: any;
+
 interface PostDetailProps {
   post: Post;
   allPosts: Post[];
@@ -17,6 +20,53 @@ interface PostDetailProps {
   isBookmarked: boolean;
   onToggleBookmark: (post: Post) => void;
 }
+
+// Helper function to parse markdown and add Tailwind styling
+const parseMarkdownWithStyling = (content: string): string => {
+  if (typeof marked === 'undefined') {
+    console.warn('marked.js not loaded yet');
+    return content;
+  }
+  
+  try {
+    // Parse markdown to HTML
+    let html = marked.parse(content);
+    
+    // Add Tailwind classes to HTML elements for proper styling
+    html = html.replace(/<h1>/g, '<h1 class="text-3xl font-serif font-bold text-[#2B2B2B] mt-8 mb-4">');
+    html = html.replace(/<h2>/g, '<h2 class="text-2xl font-serif font-bold text-[#2B2B2B] mt-6 mb-3">');
+    html = html.replace(/<h3>/g, '<h3 class="text-xl font-serif font-semibold text-[#2B2B2B] mt-5 mb-2">');
+    html = html.replace(/<h4>/g, '<h4 class="text-lg font-serif font-semibold text-[#2B2B2B] mt-4 mb-2">');
+    html = html.replace(/<h5>/g, '<h5 class="text-base font-serif font-semibold text-[#2B2B2B] mt-3 mb-1">');
+    html = html.replace(/<h6>/g, '<h6 class="text-sm font-serif font-semibold text-[#2B2B2B] mt-2 mb-1">');
+    
+    html = html.replace(/<p>/g, '<p class="leading-relaxed text-[#2B2B2B]/90">');
+    html = html.replace(/<strong>/g, '<strong class="font-semibold text-[#A67C52]">');
+    html = html.replace(/<em>/g, '<em class="italic text-[#666666]">');
+    html = html.replace(/<code>/g, '<code class="bg-[#EFEDE8] text-[#A67C52] px-2 py-1 rounded font-mono text-sm">');
+    
+    // Style links
+    html = html.replace(/<a /g, '<a class="text-[#A67C52] hover:underline transition-colors" ');
+    
+    // Style lists
+    html = html.replace(/<ul>/g, '<ul class="list-disc list-inside space-y-2 ml-4">');
+    html = html.replace(/<ol>/g, '<ol class="list-decimal list-inside space-y-2 ml-4">');
+    html = html.replace(/<li>/g, '<li class="text-[#2B2B2B]/90">');
+    
+    // Style blockquotes
+    html = html.replace(/<blockquote>/g, '<blockquote class="pl-6 py-4 border-l-2 border-[#A67C52] font-serif italic text-lg text-[#A67C52] bg-[#EFEDE8]/50 rounded-r-lg my-6">');
+    html = html.replace(/<\/blockquote>/g, '</blockquote>');
+    
+    // Style code blocks
+    html = html.replace(/<pre>/g, '<pre class="bg-[#2B2B2B] text-[#F8F7F4] p-4 rounded-lg overflow-x-auto my-4">');
+    html = html.replace(/<\/pre>/g, '</pre>');
+    
+    return html;
+  } catch (error) {
+    console.error('Error parsing markdown:', error);
+    return content;
+  }
+};
 
 export const PostDetail: React.FC<PostDetailProps> = ({
   post,
@@ -276,7 +326,7 @@ export const PostDetail: React.FC<PostDetailProps> = ({
             }
 
             return (
-              <motion.p
+              <motion.div
                 key={idx}
                 onMouseEnter={() => setActiveParagraphIndex(idx)}
                 onMouseLeave={() => setActiveParagraphIndex(null)}
@@ -284,12 +334,15 @@ export const PostDetail: React.FC<PostDetailProps> = ({
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.8, delay: isPoetry ? idx * 0.15 : 0 }}
-                className={`whitespace-pre-line leading-relaxed transition-all duration-300 ${
+                className={`transition-all duration-300 ${
                   isDimmed ? 'opacity-30 blur-[0.5px]' : 'opacity-100'
                 } ${isFocused ? 'scale-[1.01]' : ''}`}
               >
-                {paragraph}
-              </motion.p>
+                <div 
+                  className="leading-relaxed"
+                  dangerouslySetInnerHTML={{ __html: parseMarkdownWithStyling(paragraph) }}
+                />
+              </motion.div>
             );
           })}
 
