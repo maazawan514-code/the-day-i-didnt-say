@@ -30,7 +30,7 @@ collections:
           - Mathematics
           - Teaching
       - { label: "Excerpt", name: "excerpt", widget: "text" }
-      - { label: "Content", name: "content", widget: "markdown" }
+      - { label: "Content", name: "body", widget: "markdown" }
       - { label: "Featured Image", name: "featuredImage", widget: "image", required: false }
       - { label: "Publication Date", name: "date", widget: "datetime", format: "YYYY-MM-DD HH:mm" }
       - { label: "Reading Time", name: "readTime", widget: "string", required: false }
